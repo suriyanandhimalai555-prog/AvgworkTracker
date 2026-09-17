@@ -356,11 +356,17 @@ export const UserManagementView: React.FC = () => {
                 onChange={(e) => setDepartment(e.target.value)}
                 className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm outline-none"
               >
-                <option value="Engineering">Engineering</option>
+                <option value="Developer">Developer</option>
                 <option value="Product">Product</option>
                 <option value="Design">Design</option>
                 <option value="Operations">Operations</option>
                 <option value="Executive">Executive</option>
+                <option value="Tele Caller">Tele Caller</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="Block Chain">Block Chain</option>
+                <option value="Mobile App Development">Mobile App Development</option>
+                <option value="Video Editing">Video Editing</option>
+
               </select>
             </div>
           </div>
