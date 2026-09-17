@@ -14,7 +14,7 @@ interface WorkFormModalProps {
   eodGate?: EodSubmissionGate | null;
 }
 
-const CATEGORIES = ['State Head'];
+const CATEGORIES = ['State Head', 'PrimeTech'];
 
 export const WorkFormModal: React.FC<WorkFormModalProps> = ({
   isOpen,
