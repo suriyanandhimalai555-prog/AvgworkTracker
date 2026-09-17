@@ -366,6 +366,7 @@ export const UserManagementView: React.FC = () => {
                 <option value="Block Chain">Block Chain</option>
                 <option value="Mobile App Development">Mobile App Development</option>
                 <option value="Video Editing">Video Editing</option>
+                <option value="Devops">Devops</option>
 
               </select>
             </div>
