@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { findUserById } from './dbStore.js';
-import { User, UserRole } from '../../frontend/src/types.js';
+import { User, UserRole } from './types.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'work_tracker_super_secret_jwt_key_2026';
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'work_tracker_super_secret_refresh_key_2026';

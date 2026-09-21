@@ -30,7 +30,7 @@ import {
   disableEodSubmission,
 } from './dbStore.js';
 import { authenticateToken, requireRole, generateTokens, verifyRefreshToken, AuthenticatedRequest } from './auth.js';
-import { WorkFilters, WorkStatus, UserRole, QueryFilters, QueryStatus, QueryType } from '../../frontend/src/types.js';
+import { WorkFilters, WorkStatus, UserRole, QueryFilters, QueryStatus, QueryType } from './types.js';
 import { getTodayInAppTimezone } from './eodWindow.js';
 
 const router = Router();

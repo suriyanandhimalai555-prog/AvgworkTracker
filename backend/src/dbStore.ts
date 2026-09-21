@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { prisma } from './prisma.js';
-import { User, WorkUpdate, WorkAttachment, EditHistory, WorkStatus, WorkStats, WorkFilters, UserRole, EmployeeQuery, QueryFilters, QueryStatus, QueryType, EodRecord, EodReport, EodStatus, EodSubmissionGate, EodEnablement, EodSubmissionStatus, AppNotification, EmployeeQueryDetail } from '../../frontend/src/types.js';
+import { User, WorkUpdate, WorkAttachment, EditHistory, WorkStatus, WorkStats, WorkFilters, UserRole, EmployeeQuery, QueryFilters, QueryStatus, QueryType, EodRecord, EodReport, EodStatus, EodSubmissionGate, EodEnablement, EodSubmissionStatus, AppNotification, EmployeeQueryDetail } from './types.js';
 import {
   getAppTimezone,
   getEodWindowMeta,

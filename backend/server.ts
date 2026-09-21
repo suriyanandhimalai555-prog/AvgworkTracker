@@ -1,14 +1,17 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import express from 'express';
+import { fileURLToPath } from 'url';
 import path from 'path';
-import { createServer as createViteServer } from 'vite';
 import apiRouter from './src/routes.js';
 import { initializeDatabase } from './src/dbStore.js';
 import { migrateJsonToPostgres } from './src/migrateJsonToPg.js';
 
+const backendRoot = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(backendRoot, '.env') });
+
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT) || 3000;
 
   // Initialize PostgreSQL database & schema
   try {
@@ -32,7 +35,7 @@ async function startServer() {
 
   // CORS Middleware
   app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL || '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     if (req.method === 'OPTIONS') {
@@ -48,22 +51,6 @@ async function startServer() {
   app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
-
-  // Vite development server integration vs Production Static server
-  if (process.env.NODE_ENV !== 'production') {
-    const vite = await createViteServer({
-      root: path.join(process.cwd(), 'frontend'),
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), 'dist', 'client');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
-  }
 
   // Error handling middleware
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

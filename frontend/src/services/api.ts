@@ -1,6 +1,6 @@
 import { LoginResponse, User, WorkFilters, WorkStats, WorkStatus, WorkUpdate, EmployeeQuery, EmployeeQueryDetail, QueryFilters, QueryStatus, QueryType, AppNotification, EodRecord, EodReport, EodEnablement, EodSubmissionGate } from '../types';
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 export function getAuthToken(): string | null {
   return localStorage.getItem('wt_access_token');
