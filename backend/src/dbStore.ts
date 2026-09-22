@@ -8,7 +8,7 @@ import {
   getUtcRangeForLocalDate,
 } from './eodWindow.js';
 
-// Seed Managing Director details (the internal permission role remains super_admin)
+// Seed Managing Director details (the internal permission role  super_admin)
 export const SEED_ADMIN_EMAIL = 'md@company.com';
 export const SEED_ADMIN_PASSWORD = 'md@1230';
 const MANAGING_DIRECTOR_NAME = 'Managing Director';
