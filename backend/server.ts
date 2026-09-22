@@ -6,7 +6,9 @@ import apiRouter from './src/routes.js';
 import { initializeDatabase } from './src/dbStore.js';
 import { migrateJsonToPostgres } from './src/migrateJsonToPg.js';
 
-const backendRoot = path.dirname(fileURLToPath(import.meta.url));
+const backendRoot = typeof __dirname !== 'undefined'
+  ? path.resolve(__dirname, '..')
+  : path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(backendRoot, '.env') });
 
 async function startServer() {

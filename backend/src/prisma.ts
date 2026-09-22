@@ -3,7 +3,10 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { PrismaClient } from '@prisma/client';
 
-const backendRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const currentDir = typeof __dirname !== 'undefined'
+  ? __dirname
+  : path.dirname(fileURLToPath(import.meta.url));
+const backendRoot = path.resolve(currentDir, '..');
 dotenv.config({ path: path.join(backendRoot, '.env') });
 
 // Prevent multiple instances of PrismaClient in development/HMR
