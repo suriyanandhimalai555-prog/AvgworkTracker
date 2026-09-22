@@ -2,13 +2,14 @@
   "name": "worktracking-system",
   "private": true,
   "version": "1.0.0",
-  "workspaces": [
-    "backend"
-  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "build": "npm run build --workspace backend",
-    "start": "npm run start --workspace backend",
-    "dev": "npm run dev --workspace backend",
-    "lint": "npm run lint --workspace backend"
+    "build": "npm ci --prefix backend --include=dev && npm ci --prefix frontend --include=dev && npm run build --prefix frontend && npm run build --prefix backend",
+    "start": "npm start --prefix backend",
+    "dev": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend"
   }
 }

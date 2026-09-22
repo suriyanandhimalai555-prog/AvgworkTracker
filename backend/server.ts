@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 import path from 'path';
 import apiRouter from './src/routes.js';
 import { initializeDatabase } from './src/dbStore.js';
@@ -53,6 +54,15 @@ async function startServer() {
   app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
+
+  // Serve the built React app when present (production single-service deploy)
+  const clientDist = path.resolve(backendRoot, '..', 'frontend', 'dist');
+  if (fs.existsSync(path.join(clientDist, 'index.html'))) {
+    app.use(express.static(clientDist));
+    app.get(/^(?!\/api).*/, (req, res) => {
+      res.sendFile(path.join(clientDist, 'index.html'));
+    });
+  }
 
   // Error handling middleware
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
