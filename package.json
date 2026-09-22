@@ -1,0 +1,14 @@
+{
+  "name": "worktracking-system",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "backend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace backend",
+    "start": "npm run start --workspace backend",
+    "dev": "npm run dev --workspace backend",
+    "lint": "npm run lint --workspace backend"
+  }
+}
