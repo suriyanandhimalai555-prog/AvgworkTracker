@@ -6,6 +6,7 @@ import path from 'path';
 import apiRouter from './src/routes.js';
 import { initializeDatabase } from './src/dbStore.js';
 import { migrateJsonToPostgres } from './src/migrateJsonToPg.js';
+import { prisma } from './src/prisma.js';
 
 const backendRoot = typeof __dirname !== 'undefined'
   ? path.resolve(__dirname, '..')
@@ -72,9 +73,26 @@ async function startServer() {
     });
   });
 
-  app.listen(PORT, '0.0.0.0', () => {
+  const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`[Work Tracker Server] Listening on http://0.0.0.0:${PORT}`);
   });
+
+  // Graceful shutdown: Railway sends SIGTERM on redeploy. Close DB connections
+  // cleanly instead of dropping them (avoids Postgres "unexpected eof" logs).
+  let shuttingDown = false;
+  const shutdown = (signal: string) => {
+    if (shuttingDown) return;
+    shuttingDown = true;
+    console.log(`[Work Tracker Server] ${signal} received, shutting down...`);
+    setTimeout(() => process.exit(1), 10_000).unref();
+    server.close(async () => {
+      await prisma.$disconnect().catch(() => {});
+      process.exit(0);
+    });
+    server.closeIdleConnections();
+  };
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
 }
 
 startServer().catch((err) => {
