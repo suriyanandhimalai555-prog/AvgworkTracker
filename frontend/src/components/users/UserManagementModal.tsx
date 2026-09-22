@@ -364,10 +364,12 @@ export const UserManagementView: React.FC = () => {
                 <option value="Tele Caller">Tele Caller</option>
                 <option value="Digital Marketing">Digital Marketing</option>
                 <option value="Block Chain">Block Chain</option>
-                <option value="Mobile App Development">Mobile App Development</option>
-                <option value="Video Editing">Video Editing</option>
+                <option value="Mobile App Development">Mobile App Developer</option>
+                <option value="Video Editing">Video Editor</option>
                 <option value="Devops">Devops</option>
                 <option value="Data Entry">Data Entry</option>
+                <option value="Data Analyst">Data Analyst</option>
+                <option value="Developer">Developer</option>
 
               </select>
             </div>
